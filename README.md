@@ -1,59 +1,38 @@
-# 面倒臭いことはもうしない！AWS App RunnerでWebアプリを爆速でデプロイ！
+# document-template
 
+本ツールはmeetup時の手順書テンプレートとしての利用想定となります。  
+[Hokit](https://honkit.netlify.app/)を利用して、md → html変換を行い、GitHubPagesを利用して公開を行います。  
+Honkitは、GitBookをForkして作成されています。  
+作成方法などは以下を参考にしてください。  
+https://honkit.netlify.app/
+## 環境構築
 
-## 事前準備
-- Dockerのインストール
-- AWSアカウント
+1. イメージビルド  
+    document-template配下で以下のコマンドを実行する。  
+    ```
+    docker-compose build
+    ```
+## 使い方
 
+document-tempkate/honkit配下に`.md`ファイルを作成することでHTMLが作成できます。  
+`SUMMARY.md`はサイドメニューに表示するページなどをまとめているファイルとなっており、自動でサイドメニューが作成されるわけではないので注意してください。
 
-## 開発手順
-. P5.jsのアプリを「git fork」し、ローカルにアプリを配置する
-
-. ローカル環境でP5.jsのアプリを動かしてみる
-
-. AWSにログインしECRのリポジトリを作成する
-
-. Dockerイメージの作成
-
-. ECRにDockerイメージをpushする
-
-. AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う
-
-. デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する
-
-
-## やってみよう！
-
-### . P5.jsのアプリを「Git clone」し、ローカルにアプリを配置する
-#### -1 Githubのリポジトリにアクセスする
-![スクリーンショット 2021-08-02 21 17 47](https://user-images.githubusercontent.com/66664167/127860675-2844db8d-8557-4963-b434-73f50bb3c3e1.png)
-URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
-
-#### -2 リポジトリをコピーする
-フォークする写真
-
-#### -3 リポジトリをローカルに配置する
-```
-例：Desktopにクローンする場合
-~ $ cd ~/Desktop
-~/Desktop $ git clone [コピーしたURL] 
-```
-
-### . ローカル環境でP5.jsのアプリを動かしてみる
-#### -1 
-
-### . AWSにログインしECRのリポジトリを作成する
-#### -1 
-
-### . Dockerイメージの作成
-#### -1 
-
-### . ECRにDockerイメージをpushする
-#### -1 
-
-### . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う
-#### -1 
-
-### . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する
-#### -1 
-
+- Localサーバー起動  
+    以下のコマンドを実行することでhttp://localhost:4000で手順書を確認することができます。
+    ```
+    sh restart.sh
+    ```
+- .md → .html変換
+    ```
+    sh build.sh
+    ```
+- GitHubPages用html作成  
+    GitHubPagesにて公開する際、以下のコマンドを実行したうえでコミットしてください。  
+    GitHub側の設定を行うことでPublicに公開されます。
+    ```
+    sh github-page.sh
+    ```
+- PDF作成
+    ```
+    sh pdf.sh
+    ```
