@@ -48,6 +48,50 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
 #### -2 ECRの設定を行い、リポジトリを作成する
 ![スクリーンショット 2021-08-03 21 19 40](https://user-images.githubusercontent.com/66664167/128014537-bad29997-4dc7-496b-a090-a810e406bf9b.png)
 
+### . ローカルからECRにpushするためのIAM Userを作成
+#### -1 IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックする
+![スクリーンショット 2021-08-03 22 45 40](https://user-images.githubusercontent.com/66664167/128026358-ceac0edf-94ad-4698-88f1-8975e3f6f969.png)
+
+#### -2 JSONを選択、下記をコピーし貼り付ける
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:DescribeImages",
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+![スクリーンショット 2021-08-03 22 50 02](https://user-images.githubusercontent.com/66664167/128026977-c239d6c4-521d-42e7-90a4-bc72dcfaf458.png)
+
+#### -3 タグは設定せず、次のスッテプボタンをクリックし、ポリシー名を設定して作成する
+名前： AccessEcrForAppRunner
+![スクリーンショット 2021-08-03 22 58 52](https://user-images.githubusercontent.com/66664167/128028528-d7685e7e-9459-4ac8-b3d9-793f0c403962.png)
+
+#### -4 左メニューからユーザーを選択し、ユーザーを追加ボタンをクリックする
+![スクリーンショット 2021-08-03 21 36 19](https://user-images.githubusercontent.com/66664167/128016641-fe65c53f-4731-4b78-9682-e0d8c499cee6.png)
+
+#### -5 IAMユーザーを作成する
+ユーザー名： meet-up-app-runner-user
+プログラムによるアクセスにチェック
+![スクリーンショット 2021-08-03 23 03 52](https://user-images.githubusercontent.com/66664167/128029297-91ddbf30-947c-4cd9-b6e6-b72381f7138d.png)
+
+##### 既存のポリシーを直接アタッチを選択し、「AccessEcrForAppRunner」にチェックを入れ、確認画面までスキップする
+![スクリーンショット 2021-08-03 23 04 15](https://user-images.githubusercontent.com/66664167/128029327-86504574-e473-49bf-9057-2097d0870c8d.png)
+
+##### 確認画面でCSVをダウンロードする
+![スクリーンショット 2021-08-03 23 08 49](https://user-images.githubusercontent.com/66664167/128030387-716d15e2-31fd-450a-8d44-4f0135e3cd18.png)
+
+
 ### . ECRにDockerイメージをpushする
 #### -1 
 
