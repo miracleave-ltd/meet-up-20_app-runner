@@ -61,12 +61,7 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
         {
             "Effect": "Allow",
             "Action": [
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-                "ecr:DescribeImages",
-                "ecr:GetAuthorizationToken",
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:InitiateLayerUpload"
+                "ecr:*"
             ],
             "Resource": "*"
         }
