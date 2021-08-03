@@ -133,9 +133,26 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
 例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
 ```
 
-
 ### . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う
-#### -1 
+#### -1 App Runnerの画面に移動し、App Runnerサービスを作成するボタンをクリック
+![スクリーンショット 2021-08-04 0 35 42](https://user-images.githubusercontent.com/66664167/128044328-b3136e19-dbe6-4326-876f-057799f8c731.png)
+![スクリーンショット 2021-08-04 0 36 47](https://user-images.githubusercontent.com/66664167/128044351-9d24d360-d64a-432b-b968-499680363a27.png)
+
+#### -2 App Runnerサービスの設定、デプロイを行う
+##### コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する
+![スクリーンショット 2021-08-04 0 38 48](https://user-images.githubusercontent.com/66664167/128044874-0c87a24a-1d9b-48c0-9143-19c56b13b106.png)
+##### サービスを設定する
+![スクリーンショット 2021-08-04 0 41 37](https://user-images.githubusercontent.com/66664167/128045207-cdf2cd20-7e90-40cc-9384-52c05cd000a1.png)
+##### 作成とデプロイボタンをクリック
+![スクリーンショット 2021-08-04 0 43 31](https://user-images.githubusercontent.com/66664167/128045443-c021afdd-21ef-46a8-98bd-2898af97d3f2.png)
+
+
 
 ### . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する
-#### -1 
+#### -1 公開されたURLにアクセスし、実際にアプリが動いているか確認する
+![スクリーンショット 2021-08-04 0 52 41](https://user-images.githubusercontent.com/66664167/128047070-19e8b04c-eafe-42c1-9c6d-47c170165d9e.png)
+
+#### -2 アプリが問題なく動作している場合、下記の画面が表示されます
+![スクリーンショット 2021-08-04 0 55 32](https://user-images.githubusercontent.com/66664167/128047434-212e12bc-7235-48e4-b339-3936d928eb3d.png)
+
+
