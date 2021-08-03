@@ -105,7 +105,7 @@ aws_secret_access_key =
 ```
 ※設定後は esc -> :wp -> Enter の順番でキーボードを打ち、保存する
 
-#### ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする
+#### -2 ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする
 今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS　CLIコマンドを実行します。
 Dockerを通してAWS CLIコマンドを実行する際は下記コマンドをベースに実行します
 ```
