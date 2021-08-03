@@ -91,6 +91,7 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
 
 ### . ECRにDockerイメージをpushする
 #### -1 認証情報の設定
+##### credentialsの設定
 ```
 # .awsに移動
 ~/Desktop/meet-up-20_app-runner $ cd ~/.aws
@@ -102,6 +103,18 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
 [default]
 aws_access_key_id = 
 aws_secret_access_key = 
+```
+※設定後は esc -> :wp -> Enter の順番でキーボードを打ち、保存する
+
+##### configの設定
+```
+.aws $ vi config
+```
+##### 下記の形式で設定する
+```
+[default]
+region = ap-northeast-1
+output = json
 ```
 ※設定後は esc -> :wp -> Enter の順番でキーボードを打ち、保存する
 
