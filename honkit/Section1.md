@@ -49,6 +49,7 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
 ![スクリーンショット 2021-08-03 21 19 40](https://user-images.githubusercontent.com/66664167/128014537-bad29997-4dc7-496b-a090-a810e406bf9b.png)
 
 ### . ローカルからECRにpushするためのIAM Userを作成
+注意：すでに「AdministratorAccess」権限を持ち、プログラムのアクセスの権限のあるユーザーを作成されている場合は、このスッテプを飛ばしてください。
 #### -1 IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックする
 ![スクリーンショット 2021-08-03 22 45 40](https://user-images.githubusercontent.com/66664167/128026358-ceac0edf-94ad-4698-88f1-8975e3f6f969.png)
 
@@ -64,7 +65,8 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
                 "ecr:BatchGetImage",
                 "ecr:DescribeImages",
                 "ecr:GetAuthorizationToken",
-                "ecr:BatchCheckLayerAvailability"
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:InitiateLayerUpload"
             ],
             "Resource": "*"
         }
@@ -93,7 +95,44 @@ URL:https://github.com/miracleave-ltd/meet-up-20_app-runner
 
 
 ### . ECRにDockerイメージをpushする
-#### -1 
+#### -1 認証情報の設定
+```
+# .awsに移動
+~/Desktop/meet-up-20_app-runner $ cd ~/.aws
+# credentialsを作成、修正
+.aws $ vi credentials
+```
+##### 先ほど、CSVでダウンロードしたアクセスIDとアクセスキーを下記のイコールの後に値を設定する
+```
+[default]
+aws_access_key_id = 
+aws_secret_access_key = 
+```
+※設定後は esc -> :wp -> Enter の順番でキーボードを打ち、保存する
+
+#### ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする
+今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS　CLIコマンドを実行します。
+Dockerを通してAWS CLIコマンドを実行する際は下記コマンドをベースに実行します
+```
+docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [AWSコマンド]
+```
+##### プッシュコマンドを確認
+![スクリーンショット 2021-08-03 23 49 49](https://user-images.githubusercontent.com/66664167/128037047-10cdcd04-20a2-47b1-b23c-85f2782ff271.png)
+![スクリーンショット 2021-08-03 23 53 09](https://user-images.githubusercontent.com/66664167/128037302-fab17bdd-7dff-432f-91aa-28c23e87f920.png)
+
+##### ECRにプッシュする
+```
+# クローンしてきたフォルダに移動
+cd ~/Desktop/meet-up-20_app-runner
+# ログインする（ログインが成功すると「Login Succeeded」が表示される）
+docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runner-exampleのプッシュコマンドの１をコピー（先頭のawsは省く）]
+例：　docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com
+# app-runner-exampleのプッシュコマンドの3を実行
+例： docker tag app-runner-example:latest 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
+# app-runner-exampleのプッシュコマンドの4を実行
+例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
+```
+
 
 ### . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う
 #### -1 
