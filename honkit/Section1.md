@@ -156,7 +156,7 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
 
 
 
-### . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する
+### . デプロイが完了後、App Runner画面のURLにアクセスし、アプリが動いているかを確認する
 #### -1 公開されたURLにアクセスし、実際にアプリが動いているか確認する
 ![スクリーンショット 2021-08-04 0 52 41](https://user-images.githubusercontent.com/66664167/128047070-19e8b04c-eafe-42c1-9c6d-47c170165d9e.png)
 
