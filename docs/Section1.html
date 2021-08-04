@@ -179,25 +179,119 @@
 <h4 id="-1_Githubのリポジトリにアクセスする">1.1.1. -1 Githubのリポジトリにアクセスする</h4>
 <p><img src="https://user-images.githubusercontent.com/66664167/127860675-2844db8d-8557-4963-b434-73f50bb3c3e1.png" alt="スクリーンショット 2021-08-02 21 17 47">
 URL:<a href="https://github.com/miracleave-ltd/meet-up-20_app-runner" target="_blank">https://github.com/miracleave-ltd/meet-up-20_app-runner</a></p>
-<h4 id="-2_リポジトリをコピーする">1.1.2. -2 リポジトリをコピーする</h4>
-<p>フォークする写真</p>
+<h4 id="-2_リポジトリをコピーする（Forkボタンを押下する）">1.1.2. -2 リポジトリをコピーする（Forkボタンを押下する）</h4>
+<p><img width="1440" alt="スクリーンショット 2021-08-03 20 27 36" src="https://user-images.githubusercontent.com/66664167/128008196-b4cf89b2-46bc-4ba2-aba4-a88ce1d478f2.png">
+※Forkボタンをクリック後、Githubにログインしている方は自動で自分のリポジトリに遷移します。</p>
 <h4 id="-3_リポジトリをローカルに配置する">1.1.3. -3 リポジトリをローカルに配置する</h4>
+<h5 id="自分のリポジトリにコピーされたアプリのURLをコピーする"><a name="自分のリポジトリにコピーされたアプリのurlをコピーする" class="plugin-anchor" href="#自分のリポジトリにコピーされたアプリのurlをコピーする"><i class="fa fa-link" aria-hidden="true"></i></a>自分のリポジトリにコピーされたアプリのURLをコピーする</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128008838-a6c0f1ed-157f-4a71-8f4c-818cc6da4b91.png" alt="スクリーンショット 2021-08-03 20 34 56"></p>
+<h5 id="ターミナルに移動し、git_cloneを行う"><a name="ターミナルに移動し、git-cloneを行う" class="plugin-anchor" href="#ターミナルに移動し、git-cloneを行う"><i class="fa fa-link" aria-hidden="true"></i></a>ターミナルに移動し、git cloneを行う</h5>
 <pre><code>例：Desktopにクローンする場合
 ~ $ cd ~/Desktop
 ~/Desktop $ git clone [コピーしたURL]
 </code></pre><h3 id="__ローカル環境でP5_jsのアプリを動かしてみる">1.2. . ローカル環境でP5.jsのアプリを動かしてみる</h3>
-<h4 id="-1">1.2.1. -1</h4>
+<h4 id="-1_イメージの作成">1.2.1. -1 イメージの作成</h4>
+<pre><code># meet-up-20_app-runnerフォルダに移動
+~/Desktop $ cd meet-up-20_app-runner
+# Dockerイメージの作成
+~/Desktop/meet-up-20_app-runner $ docker build . -t app-runner-example
+</code></pre><h4 id="-2_コンテナの作成、起動">1.2.2. -2 コンテナの作成、起動</h4>
+<pre><code>~/Desktop/meet-up-20_app-runner $ docker run -p 3333:3333 -d app-runner-example
+</code></pre><h4 id="-3_アプリが動いているかを確認">1.2.3. -3 アプリが動いているかを確認</h4>
+<h5 id="http:__localhost:3333"><a name="httplocalhost3333" class="plugin-anchor" href="#httplocalhost3333"><i class="fa fa-link" aria-hidden="true"></i></a><a href="http://localhost:3333" target="_blank">http://localhost:3333</a></h5>
+<p>※実際に動いていれば下記の画面が表示されます。
+<img width="1440" alt="スクリーンショット 2021-08-03 20 58 45" src="https://user-images.githubusercontent.com/66664167/128011658-a378908e-8b27-48d2-a3a3-81d31b0803fb.png"></p>
 <h3 id="__AWSにログインしECRのリポジトリを作成する">1.3. . AWSにログインしECRのリポジトリを作成する</h3>
-<h4 id="-1">1.3.1. -1</h4>
-<h3 id="__Dockerイメージの作成">1.4. . Dockerイメージの作成</h3>
-<h4 id="-1">1.4.1. -1</h4>
+<h4 id="-1_ECRの画面に移動し、リポジトリを作成ボタンをクリックする">1.3.1. -1 ECRの画面に移動し、リポジトリを作成ボタンをクリックする</h4>
+<h5 id="検索欄から「ECR」と検索"><a name="検索欄から「ecr」と検索" class="plugin-anchor" href="#検索欄から「ecr」と検索"><i class="fa fa-link" aria-hidden="true"></i></a>検索欄から「ECR」と検索</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128013634-27a65469-2040-4e8e-b3e5-7798ac279343.png" alt="スクリーンショット 2021-08-03 21 13 58">
+<img src="https://user-images.githubusercontent.com/66664167/128013920-1c095f4b-d2ae-4f7c-9e4e-402ae0e5fd46.png" alt="スクリーンショット 2021-08-03 21 16 26"></p>
+<h4 id="-2_ECRの設定を行い、リポジトリを作成する">1.3.2. -2 ECRの設定を行い、リポジトリを作成する</h4>
+<p><img src="https://user-images.githubusercontent.com/66664167/128014537-bad29997-4dc7-496b-a090-a810e406bf9b.png" alt="スクリーンショット 2021-08-03 21 19 40"></p>
+<h3 id="__ローカルからECRにpushするためのIAM_Userを作成">1.4. . ローカルからECRにpushするためのIAM Userを作成</h3>
+<p>注意：すでに「AdministratorAccess」権限を持ち、プログラムのアクセスの権限のあるユーザーを作成されている場合は、このスッテプを飛ばしてください。</p>
+<h4 id="-1_IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックする">1.4.1. -1 IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックする</h4>
+<p><img src="https://user-images.githubusercontent.com/66664167/128026358-ceac0edf-94ad-4698-88f1-8975e3f6f969.png" alt="スクリーンショット 2021-08-03 22 45 40"></p>
+<h4 id="-2_JSONを選択、下記をコピーし貼り付ける">1.4.2. -2 JSONを選択、下記をコピーし貼り付ける</h4>
+<pre><code>{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;ecr:*&quot;
+            ],
+            &quot;Resource&quot;: &quot;*&quot;
+        }
+    ]
+}
+</code></pre><p><img src="https://user-images.githubusercontent.com/66664167/128026977-c239d6c4-521d-42e7-90a4-bc72dcfaf458.png" alt="スクリーンショット 2021-08-03 22 50 02"></p>
+<h4 id="-3_タグは設定せず、次のスッテプボタンをクリックし、ポリシー名を設定して作成する">1.4.3. -3 タグは設定せず、次のスッテプボタンをクリックし、ポリシー名を設定して作成する</h4>
+<p>名前： AccessEcrForAppRunner
+<img src="https://user-images.githubusercontent.com/66664167/128028528-d7685e7e-9459-4ac8-b3d9-793f0c403962.png" alt="スクリーンショット 2021-08-03 22 58 52"></p>
+<h4 id="-4_左メニューからユーザーを選択し、ユーザーを追加ボタンをクリックする">1.4.4. -4 左メニューからユーザーを選択し、ユーザーを追加ボタンをクリックする</h4>
+<p><img src="https://user-images.githubusercontent.com/66664167/128016641-fe65c53f-4731-4b78-9682-e0d8c499cee6.png" alt="スクリーンショット 2021-08-03 21 36 19"></p>
+<h4 id="-5_IAMユーザーを作成する">1.4.5. -5 IAMユーザーを作成する</h4>
+<p>ユーザー名： meet-up-app-runner-user
+プログラムによるアクセスにチェック
+<img src="https://user-images.githubusercontent.com/66664167/128029297-91ddbf30-947c-4cd9-b6e6-b72381f7138d.png" alt="スクリーンショット 2021-08-03 23 03 52"></p>
+<h5 id="既存のポリシーを直接アタッチを選択し、「AccessEcrForAppRunner」にチェックを入れ、確認画面までスキップする"><a name="既存のポリシーを直接アタッチを選択し、「accessecrforapprunner」にチェックを入れ、確認画面までスキップする" class="plugin-anchor" href="#既存のポリシーを直接アタッチを選択し、「accessecrforapprunner」にチェックを入れ、確認画面までスキップする"><i class="fa fa-link" aria-hidden="true"></i></a>既存のポリシーを直接アタッチを選択し、「AccessEcrForAppRunner」にチェックを入れ、確認画面までスキップする</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128029327-86504574-e473-49bf-9057-2097d0870c8d.png" alt="スクリーンショット 2021-08-03 23 04 15"></p>
+<h5 id="確認画面でCSVをダウンロードする"><a name="確認画面でcsvをダウンロードする" class="plugin-anchor" href="#確認画面でcsvをダウンロードする"><i class="fa fa-link" aria-hidden="true"></i></a>確認画面でCSVをダウンロードする</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128030387-716d15e2-31fd-450a-8d44-4f0135e3cd18.png" alt="スクリーンショット 2021-08-03 23 08 49"></p>
 <h3 id="__ECRにDockerイメージをpushする">1.5. . ECRにDockerイメージをpushする</h3>
-<h4 id="-1">1.5.1. -1</h4>
-<h3 id="__AWSのApp_Runnerの画面に移動し、App_Runnerの設定、デプロイを行う">1.6. . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う</h3>
-<h4 id="-1">1.6.1. -1</h4>
-<h3 id="__デプロイが完了後、App_Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する">1.7. . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する</h3>
-<h4 id="-1">1.7.1. -1</h4>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#Section1">Section1</a></p><li><a href="#やってみよう！">1. やってみよう！</a></li><ul><li><a href="#__P5_jsのアプリを「Git_clone」し、ローカルにアプリを配置する">1.1. . P5.jsのアプリを「Git clone」し、ローカルにアプリを配置する</a></li><ul><li><a href="#-1_Githubのリポジトリにアクセスする">1.1.1. -1 Githubのリポジトリにアクセスする</a></li><li><a href="#-2_リポジトリをコピーする">1.1.2. -2 リポジトリをコピーする</a></li><li><a href="#-3_リポジトリをローカルに配置する">1.1.3. -3 リポジトリをローカルに配置する</a></li></ul><li><a href="#__ローカル環境でP5_jsのアプリを動かしてみる">1.2. . ローカル環境でP5.jsのアプリを動かしてみる</a></li><ul><li><a href="#-1">1.2.1. -1</a></li></ul><li><a href="#__AWSにログインしECRのリポジトリを作成する">1.3. . AWSにログインしECRのリポジトリを作成する</a></li><ul><li><a href="#-1">1.3.1. -1</a></li></ul><li><a href="#__Dockerイメージの作成">1.4. . Dockerイメージの作成</a></li><ul><li><a href="#-1">1.4.1. -1</a></li></ul><li><a href="#__ECRにDockerイメージをpushする">1.5. . ECRにDockerイメージをpushする</a></li><ul><li><a href="#-1">1.5.1. -1</a></li></ul><li><a href="#__AWSのApp_Runnerの画面に移動し、App_Runnerの設定、デプロイを行う">1.6. . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う</a></li><ul><li><a href="#-1">1.6.1. -1</a></li></ul><li><a href="#__デプロイが完了後、App_Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する">1.7. . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する</a></li><ul><li><a href="#-1">1.7.1. -1</a></li></ul></ul></ul></div><a href="#やってみよう！" id="goTop"><i class="fa fa-arrow-up"></i></a>
+<h4 id="-1_認証情報の設定">1.5.1. -1 認証情報の設定</h4>
+<h5 id="credentialsの設定"><a name="credentialsの設定" class="plugin-anchor" href="#credentialsの設定"><i class="fa fa-link" aria-hidden="true"></i></a>credentialsの設定</h5>
+<pre><code># .awsに移動
+~/Desktop/meet-up-20_app-runner $ cd ~/.aws
+# credentialsを作成、修正
+.aws $ vi credentials
+</code></pre><h5 id="先ほど、CSVでダウンロードしたアクセスIDとアクセスキーを下記のイコールの後に値を設定する"><a name="先ほど、csvでダウンロードしたアクセスidとアクセスキーを下記のイコールの後に値を設定する" class="plugin-anchor" href="#先ほど、csvでダウンロードしたアクセスidとアクセスキーを下記のイコールの後に値を設定する"><i class="fa fa-link" aria-hidden="true"></i></a>先ほど、CSVでダウンロードしたアクセスIDとアクセスキーを下記のイコールの後に値を設定する</h5>
+<pre><code>[default]
+aws_access_key_id = 
+aws_secret_access_key =
+</code></pre><p>※設定後は esc -&gt; :wp -&gt; Enter の順番でキーボードを打ち、保存する</p>
+<h5 id="configの設定"><a name="configの設定" class="plugin-anchor" href="#configの設定"><i class="fa fa-link" aria-hidden="true"></i></a>configの設定</h5>
+<pre><code>.aws $ vi config
+</code></pre><h5 id="下記の形式で設定する"><a name="下記の形式で設定する" class="plugin-anchor" href="#下記の形式で設定する"><i class="fa fa-link" aria-hidden="true"></i></a>下記の形式で設定する</h5>
+<pre><code>[default]
+region = ap-northeast-1
+output = json
+</code></pre><p>※設定後は esc -&gt; :wp -&gt; Enter の順番でキーボードを打ち、保存する</p>
+<h4 id="-2_ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする">1.5.2. -2 ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする</h4>
+<p>今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS　CLIコマンドを実行します。
+Dockerを通してAWS CLIコマンドを実行する際は下記コマンドをベースに実行します</p>
+<pre><code>docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [AWSコマンド]
+</code></pre><h5 id="プッシュコマンドを確認"><a name="プッシュコマンドを確認" class="plugin-anchor" href="#プッシュコマンドを確認"><i class="fa fa-link" aria-hidden="true"></i></a>プッシュコマンドを確認</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128037047-10cdcd04-20a2-47b1-b23c-85f2782ff271.png" alt="スクリーンショット 2021-08-03 23 49 49">
+<img src="https://user-images.githubusercontent.com/66664167/128037302-fab17bdd-7dff-432f-91aa-28c23e87f920.png" alt="スクリーンショット 2021-08-03 23 53 09"></p>
+<h5 id="ECRにプッシュする"><a name="ecrにプッシュする" class="plugin-anchor" href="#ecrにプッシュする"><i class="fa fa-link" aria-hidden="true"></i></a>ECRにプッシュする</h5>
+<pre><code># クローンしてきたフォルダに移動
+cd ~/Desktop/meet-up-20_app-runner
+# ログインする（ログインが成功すると「Login Succeeded」が表示される）
+docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runner-exampleのプッシュコマンドの１をコピー（先頭のawsは省く）]
+例：　docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com
+# app-runner-exampleのプッシュコマンドの3を実行
+例： docker tag app-runner-example:latest 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
+# app-runner-exampleのプッシュコマンドの4を実行
+例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
+</code></pre><h3 id="__AWSのApp_Runnerの画面に移動し、App_Runnerの設定、デプロイを行う">1.6. . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う</h3>
+<h4 id="-1_App_Runnerの画面に移動し、App_Runnerサービスを作成するボタンをクリック">1.6.1. -1 App Runnerの画面に移動し、App Runnerサービスを作成するボタンをクリック</h4>
+<p><img src="https://user-images.githubusercontent.com/66664167/128044328-b3136e19-dbe6-4326-876f-057799f8c731.png" alt="スクリーンショット 2021-08-04 0 35 42">
+<img src="https://user-images.githubusercontent.com/66664167/128044351-9d24d360-d64a-432b-b968-499680363a27.png" alt="スクリーンショット 2021-08-04 0 36 47"></p>
+<h4 id="-2_App_Runnerサービスの設定、デプロイを行う">1.6.2. -2 App Runnerサービスの設定、デプロイを行う</h4>
+<h5 id="コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する"><a name="コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する" class="plugin-anchor" href="#コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128044874-0c87a24a-1d9b-48c0-9143-19c56b13b106.png" alt="スクリーンショット 2021-08-04 0 38 48"></p>
+<h5 id="サービスを設定する"><a name="サービスを設定する" class="plugin-anchor" href="#サービスを設定する"><i class="fa fa-link" aria-hidden="true"></i></a>サービスを設定する</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128045207-cdf2cd20-7e90-40cc-9384-52c05cd000a1.png" alt="スクリーンショット 2021-08-04 0 41 37"></p>
+<h5 id="作成とデプロイボタンをクリック"><a name="作成とデプロイボタンをクリック" class="plugin-anchor" href="#作成とデプロイボタンをクリック"><i class="fa fa-link" aria-hidden="true"></i></a>作成とデプロイボタンをクリック</h5>
+<p><img src="https://user-images.githubusercontent.com/66664167/128045443-c021afdd-21ef-46a8-98bd-2898af97d3f2.png" alt="スクリーンショット 2021-08-04 0 43 31"></p>
+<h3 id="__デプロイが完了後、App_Runner画面のURLにアクセスし、アプリが動いているかを確認する">1.7. . デプロイが完了後、App Runner画面のURLにアクセスし、アプリが動いているかを確認する</h3>
+<h4 id="-1_公開されたURLにアクセスし、実際にアプリが動いているか確認する">1.7.1. -1 公開されたURLにアクセスし、実際にアプリが動いているか確認する</h4>
+<p><img src="https://user-images.githubusercontent.com/66664167/128047070-19e8b04c-eafe-42c1-9c6d-47c170165d9e.png" alt="スクリーンショット 2021-08-04 0 52 41"></p>
+<h4 id="-2_アプリが問題なく動作している場合、下記の画面が表示されます">1.7.2. -2 アプリが問題なく動作している場合、下記の画面が表示されます</h4>
+<p><img src="https://user-images.githubusercontent.com/66664167/128047434-212e12bc-7235-48e4-b339-3936d928eb3d.png" alt="スクリーンショット 2021-08-04 0 55 32"></p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#Section1">Section1</a></p><li><a href="#やってみよう！">1. やってみよう！</a></li><ul><li><a href="#__P5_jsのアプリを「Git_clone」し、ローカルにアプリを配置する">1.1. . P5.jsのアプリを「Git clone」し、ローカルにアプリを配置する</a></li><ul><li><a href="#-1_Githubのリポジトリにアクセスする">1.1.1. -1 Githubのリポジトリにアクセスする</a></li><li><a href="#-2_リポジトリをコピーする（Forkボタンを押下する）">1.1.2. -2 リポジトリをコピーする（Forkボタンを押下する）</a></li><li><a href="#-3_リポジトリをローカルに配置する">1.1.3. -3 リポジトリをローカルに配置する</a></li></ul><li><a href="#__ローカル環境でP5_jsのアプリを動かしてみる">1.2. . ローカル環境でP5.jsのアプリを動かしてみる</a></li><ul><li><a href="#-1_イメージの作成">1.2.1. -1 イメージの作成</a></li><li><a href="#-2_コンテナの作成、起動">1.2.2. -2 コンテナの作成、起動</a></li><li><a href="#-3_アプリが動いているかを確認">1.2.3. -3 アプリが動いているかを確認</a></li></ul><li><a href="#__AWSにログインしECRのリポジトリを作成する">1.3. . AWSにログインしECRのリポジトリを作成する</a></li><ul><li><a href="#-1_ECRの画面に移動し、リポジトリを作成ボタンをクリックする">1.3.1. -1 ECRの画面に移動し、リポジトリを作成ボタンをクリックする</a></li><li><a href="#-2_ECRの設定を行い、リポジトリを作成する">1.3.2. -2 ECRの設定を行い、リポジトリを作成する</a></li></ul><li><a href="#__ローカルからECRにpushするためのIAM_Userを作成">1.4. . ローカルからECRにpushするためのIAM Userを作成</a></li><ul><li><a href="#-1_IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックする">1.4.1. -1 IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックする</a></li><li><a href="#-2_JSONを選択、下記をコピーし貼り付ける">1.4.2. -2 JSONを選択、下記をコピーし貼り付ける</a></li><li><a href="#-3_タグは設定せず、次のスッテプボタンをクリックし、ポリシー名を設定して作成する">1.4.3. -3 タグは設定せず、次のスッテプボタンをクリックし、ポリシー名を設定して作成する</a></li><li><a href="#-4_左メニューからユーザーを選択し、ユーザーを追加ボタンをクリックする">1.4.4. -4 左メニューからユーザーを選択し、ユーザーを追加ボタンをクリックする</a></li><li><a href="#-5_IAMユーザーを作成する">1.4.5. -5 IAMユーザーを作成する</a></li></ul><li><a href="#__ECRにDockerイメージをpushする">1.5. . ECRにDockerイメージをpushする</a></li><ul><li><a href="#-1_認証情報の設定">1.5.1. -1 認証情報の設定</a></li><li><a href="#-2_ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする">1.5.2. -2 ECR画面に移動し、プッシュコマンドを確認し、ECRにpushする</a></li></ul><li><a href="#__AWSのApp_Runnerの画面に移動し、App_Runnerの設定、デプロイを行う">1.6. . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う</a></li><ul><li><a href="#-1_App_Runnerの画面に移動し、App_Runnerサービスを作成するボタンをクリック">1.6.1. -1 App Runnerの画面に移動し、App Runnerサービスを作成するボタンをクリック</a></li><li><a href="#-2_App_Runnerサービスの設定、デプロイを行う">1.6.2. -2 App Runnerサービスの設定、デプロイを行う</a></li></ul><li><a href="#__デプロイが完了後、App_Runner画面のURLにアクセスし、アプリが動いているかを確認する">1.7. . デプロイが完了後、App Runner画面のURLにアクセスし、アプリが動いているかを確認する</a></li><ul><li><a href="#-1_公開されたURLにアクセスし、実際にアプリが動いているか確認する">1.7.1. -1 公開されたURLにアクセスし、実際にアプリが動いているか確認する</a></li><li><a href="#-2_アプリが問題なく動作している場合、下記の画面が表示されます">1.7.2. -2 アプリが問題なく動作している場合、下記の画面が表示されます</a></li></ul></ul></ul></div><a href="#やってみよう！" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -236,7 +330,7 @@ URL:<a href="https://github.com/miracleave-ltd/meet-up-20_app-runner" target="_b
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"セクション１","level":"1.2","depth":1,"previous":{"title":"はじめに","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section1.md","mtime":"2021-08-03T05:19:28.440Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-03T05:32:24.137Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"セクション１","level":"1.2","depth":1,"previous":{"title":"はじめに","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section1.md","mtime":"2021-08-04T09:32:44.584Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T10:00:45.488Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
