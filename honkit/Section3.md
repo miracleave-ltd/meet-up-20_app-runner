@@ -114,3 +114,25 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
 # app-runner-exampleのプッシュコマンドの4を実行
 例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
 ```
+
+
+## AppRunner作成
+### App Runnerの画面に移動
+![](img/17.png)
+### App Runnerサービスを作成するボタンをクリック
+![](img/18.png)
+
+### App Runnerサービスの設定、デプロイを行う
+##### コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する
+![](img/19.png)
+##### サービスを設定する
+![](img/20.png)
+##### 作成とデプロイボタンをクリック
+![](img/21.png)
+
+
+## デプロイ内容確認
+### デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認
+![](img/22.png)  
+#### アプリが問題なく動作している場合、下記の画面が表示されます。  
+![](img/23.png)  

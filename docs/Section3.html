@@ -72,7 +72,7 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Section4.html" />
+    <link rel="next" href="Section5.html" />
     
     
     <link rel="prev" href="Section2.html" />
@@ -153,25 +153,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="Section4.html">
-            
-                <a href="Section4.html">
-            
-                    
-                    1. AppRunnerデプロイ
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -320,7 +301,24 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
 例： docker tag app-runner-example:latest 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
 # app-runner-exampleのプッシュコマンドの4を実行
 例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
-</code></pre><div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#コンテナレジストリパターン">コンテナレジストリパターン</a></p><li><a href="#ECRリポジトリ作成">1. ECRリポジトリ作成</a></li><li><a href="#ECR用IAM_User作成">2. ECR用IAM User作成</a></li><ul><li><a href="#ECR用ポリシー作成">2.1. ECR用ポリシー作成</a></li><li><a href="#IAM_User作成">2.2. IAM User作成</a></li></ul><li><a href="#Dockerイメージプッシュ">3. Dockerイメージプッシュ</a></li><ul><li><a href="#AWS認証情報の設定">3.1. AWS認証情報の設定</a></li><li><a href="#ECRイメージプッシュ">3.2. ECRイメージプッシュ</a></li></ul></ul></div><a href="#ECRリポジトリ作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
+</code></pre><h2 id="AppRunner作成">4. AppRunner作成</h2>
+<h3 id="App_Runnerの画面に移動">4.1. App Runnerの画面に移動</h3>
+<p><img src="img/17.png" alt></p>
+<h3 id="App_Runnerサービスを作成するボタンをクリック">4.2. App Runnerサービスを作成するボタンをクリック</h3>
+<p><img src="img/18.png" alt></p>
+<h3 id="App_Runnerサービスの設定、デプロイを行う">4.3. App Runnerサービスの設定、デプロイを行う</h3>
+<h5 id="コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する"><a name="コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する" class="plugin-anchor" href="#コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する</h5>
+<p><img src="img/19.png" alt></p>
+<h5 id="サービスを設定する"><a name="サービスを設定する" class="plugin-anchor" href="#サービスを設定する"><i class="fa fa-link" aria-hidden="true"></i></a>サービスを設定する</h5>
+<p><img src="img/20.png" alt></p>
+<h5 id="作成とデプロイボタンをクリック"><a name="作成とデプロイボタンをクリック" class="plugin-anchor" href="#作成とデプロイボタンをクリック"><i class="fa fa-link" aria-hidden="true"></i></a>作成とデプロイボタンをクリック</h5>
+<p><img src="img/21.png" alt></p>
+<h2 id="デプロイ内容確認">5. デプロイ内容確認</h2>
+<h3 id="デプロイが完了後、App_Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認">5.1. デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認</h3>
+<p><img src="img/22.png" alt>  </p>
+<h4 id="アプリが問題なく動作している場合、下記の画面が表示されます。">5.1.1. アプリが問題なく動作している場合、下記の画面が表示されます。</h4>
+<p><img src="img/23.png" alt>  </p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#コンテナレジストリパターン">コンテナレジストリパターン</a></p><li><a href="#ECRリポジトリ作成">1. ECRリポジトリ作成</a></li><li><a href="#ECR用IAM_User作成">2. ECR用IAM User作成</a></li><ul><li><a href="#ECR用ポリシー作成">2.1. ECR用ポリシー作成</a></li><li><a href="#IAM_User作成">2.2. IAM User作成</a></li></ul><li><a href="#Dockerイメージプッシュ">3. Dockerイメージプッシュ</a></li><ul><li><a href="#AWS認証情報の設定">3.1. AWS認証情報の設定</a></li><li><a href="#ECRイメージプッシュ">3.2. ECRイメージプッシュ</a></li></ul><li><a href="#AppRunner作成">4. AppRunner作成</a></li><ul><li><a href="#App_Runnerの画面に移動">4.1. App Runnerの画面に移動</a></li><li><a href="#App_Runnerサービスを作成するボタンをクリック">4.2. App Runnerサービスを作成するボタンをクリック</a></li><li><a href="#App_Runnerサービスの設定、デプロイを行う">4.3. App Runnerサービスの設定、デプロイを行う</a></li></ul><li><a href="#デプロイ内容確認">5. デプロイ内容確認</a></li><ul><li><a href="#デプロイが完了後、App_Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認">5.1. デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認</a></li><ul><li><a href="#アプリが問題なく動作している場合、下記の画面が表示されます。">5.1.1. アプリが問題なく動作している場合、下記の画面が表示されます。</a></li></ul></ul></ul></div><a href="#ECRリポジトリ作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -352,7 +350,7 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
                 </a>
                 
                 
-                <a href="Section4.html" class="navigation navigation-next " aria-label="Next page: 1. AppRunnerデプロイ">
+                <a href="Section5.html" class="navigation navigation-next " aria-label="Next page: 4. ソースコードリポジトリパターン">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -363,7 +361,7 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"1. AppRunnerデプロイ","level":"1.4.1","depth":2,"path":"Section4.md","ref":"Section4.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-04T06:47:01.756Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T08:39:12.190Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-04T10:45:20.775Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T10:45:35.201Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
