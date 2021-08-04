@@ -3,7 +3,7 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>セクション１ · mirameet</title>
+        <title>1. デモアプリクローン · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -72,6 +72,8 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="Section2.html" />
+    
     
     <link rel="prev" href="./" />
     
@@ -120,7 +122,78 @@
                 <a href="Section1.html">
             
                     
-                    セクション１
+                    1. デモアプリクローン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Section2.html">
+            
+                <a href="Section2.html">
+            
+                    
+                    2. アプリ動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Section3.html">
+            
+                <a href="Section3.html">
+            
+                    
+                    3. コンテナレジストリパターン
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="Section4.html">
+            
+                <a href="Section4.html">
+            
+                    
+                    1. AppRunnerデプロイ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Section5.html">
+            
+                <a href="Section5.html">
+            
+                    
+                    4. ソースコードリポジトリパターン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section7.html">
+            
+                <a href="Section7.html">
+            
+                    
+                    5. ゴミ掃除
             
                 </a>
             
@@ -158,7 +231,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >セクション１</a>
+        <a href="." >1. デモアプリクローン</a>
     </h1>
 </div>
 
@@ -173,31 +246,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="Section1"><a name="section1" class="plugin-anchor" href="#section1"><i class="fa fa-link" aria-hidden="true"></i></a>Section1</h1>
-<h2 id="やってみよう！">1. やってみよう！</h2>
-<h3 id="__P5_jsのアプリを「Git_clone」し、ローカルにアプリを配置する">1.1. . P5.jsのアプリを「Git clone」し、ローカルにアプリを配置する</h3>
-<h4 id="-1_Githubのリポジトリにアクセスする">1.1.1. -1 Githubのリポジトリにアクセスする</h4>
-<p><img src="https://user-images.githubusercontent.com/66664167/127860675-2844db8d-8557-4963-b434-73f50bb3c3e1.png" alt="スクリーンショット 2021-08-02 21 17 47">
-URL:<a href="https://github.com/miracleave-ltd/meet-up-20_app-runner" target="_blank">https://github.com/miracleave-ltd/meet-up-20_app-runner</a></p>
-<h4 id="-2_リポジトリをコピーする">1.1.2. -2 リポジトリをコピーする</h4>
-<p>フォークする写真</p>
-<h4 id="-3_リポジトリをローカルに配置する">1.1.3. -3 リポジトリをローカルに配置する</h4>
-<pre><code>例：Desktopにクローンする場合
-~ $ cd ~/Desktop
+                                <h1 id="デモアプリクローン"><a name="デモアプリクローン" class="plugin-anchor" href="#デモアプリクローン"><i class="fa fa-link" aria-hidden="true"></i></a>デモアプリクローン</h1>
+<h2 id="Githubリポジトリ表示">1. Githubリポジトリ表示</h2>
+<p>次のリンクよりデモアプリがあるGitHubリポジトリにアクセスします。<br>URL:<a href="https://github.com/miracleave-ltd/meet-up-20_app-runner" target="_blank">https://github.com/miracleave-ltd/meet-up-20_app-runner</a><br><img src="img/1.png" alt>  </p>
+<h2 id="リポジトリコピー">2. リポジトリコピー</h2>
+<p>Forkボタンをクリックします。<br><img src="img/2.png" alt><br>※Forkボタンをクリック後、Githubにログインしている方は自動で自分のリポジトリに遷移します。</p>
+<h2 id="クローン用URL取得">3. クローン用URL取得</h2>
+<p>自分のリポジトリにコピーされたアプリのURLをコピーします。<br><img src="img/3.png" alt>  </p>
+<h2 id="アプリクローン">4. アプリクローン</h2>
+<p>以下の操作を行い、GitHubよりアプリを取得します。  </p>
+<p>例：Desktopにクローンする場合</p>
+<pre><code>~ $ cd ~/Desktop
 ~/Desktop $ git clone [コピーしたURL]
-</code></pre><h3 id="__ローカル環境でP5_jsのアプリを動かしてみる">1.2. . ローカル環境でP5.jsのアプリを動かしてみる</h3>
-<h4 id="-1">1.2.1. -1</h4>
-<h3 id="__AWSにログインしECRのリポジトリを作成する">1.3. . AWSにログインしECRのリポジトリを作成する</h3>
-<h4 id="-1">1.3.1. -1</h4>
-<h3 id="__Dockerイメージの作成">1.4. . Dockerイメージの作成</h3>
-<h4 id="-1">1.4.1. -1</h4>
-<h3 id="__ECRにDockerイメージをpushする">1.5. . ECRにDockerイメージをpushする</h3>
-<h4 id="-1">1.5.1. -1</h4>
-<h3 id="__AWSのApp_Runnerの画面に移動し、App_Runnerの設定、デプロイを行う">1.6. . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う</h3>
-<h4 id="-1">1.6.1. -1</h4>
-<h3 id="__デプロイが完了後、App_Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する">1.7. . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する</h3>
-<h4 id="-1">1.7.1. -1</h4>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#Section1">Section1</a></p><li><a href="#やってみよう！">1. やってみよう！</a></li><ul><li><a href="#__P5_jsのアプリを「Git_clone」し、ローカルにアプリを配置する">1.1. . P5.jsのアプリを「Git clone」し、ローカルにアプリを配置する</a></li><ul><li><a href="#-1_Githubのリポジトリにアクセスする">1.1.1. -1 Githubのリポジトリにアクセスする</a></li><li><a href="#-2_リポジトリをコピーする">1.1.2. -2 リポジトリをコピーする</a></li><li><a href="#-3_リポジトリをローカルに配置する">1.1.3. -3 リポジトリをローカルに配置する</a></li></ul><li><a href="#__ローカル環境でP5_jsのアプリを動かしてみる">1.2. . ローカル環境でP5.jsのアプリを動かしてみる</a></li><ul><li><a href="#-1">1.2.1. -1</a></li></ul><li><a href="#__AWSにログインしECRのリポジトリを作成する">1.3. . AWSにログインしECRのリポジトリを作成する</a></li><ul><li><a href="#-1">1.3.1. -1</a></li></ul><li><a href="#__Dockerイメージの作成">1.4. . Dockerイメージの作成</a></li><ul><li><a href="#-1">1.4.1. -1</a></li></ul><li><a href="#__ECRにDockerイメージをpushする">1.5. . ECRにDockerイメージをpushする</a></li><ul><li><a href="#-1">1.5.1. -1</a></li></ul><li><a href="#__AWSのApp_Runnerの画面に移動し、App_Runnerの設定、デプロイを行う">1.6. . AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行う</a></li><ul><li><a href="#-1">1.6.1. -1</a></li></ul><li><a href="#__デプロイが完了後、App_Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する">1.7. . デプロイが完了後、App Runnerの画面にURLがあるのでアクセスし、アプリが動いているかを確認する</a></li><ul><li><a href="#-1">1.7.1. -1</a></li></ul></ul></ul></div><a href="#やってみよう！" id="goTop"><i class="fa fa-arrow-up"></i></a>
+</code></pre><div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#デモアプリクローン">デモアプリクローン</a></p><li><a href="#Githubリポジトリ表示">1. Githubリポジトリ表示</a></li><li><a href="#リポジトリコピー">2. リポジトリコピー</a></li><li><a href="#クローン用URL取得">3. クローン用URL取得</a></li><li><a href="#アプリクローン">4. アプリクローン</a></li></ul></div><a href="#Githubリポジトリ表示" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -224,10 +285,14 @@ URL:<a href="https://github.com/miracleave-ltd/meet-up-20_app-runner" target="_b
 
             
                 
-                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: はじめに">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: はじめに">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="Section2.html" class="navigation navigation-next " aria-label="Next page: 2. アプリ動作確認">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -236,7 +301,7 @@ URL:<a href="https://github.com/miracleave-ltd/meet-up-20_app-runner" target="_b
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"セクション１","level":"1.2","depth":1,"previous":{"title":"はじめに","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section1.md","mtime":"2021-08-03T05:19:28.440Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-03T05:32:24.137Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1. デモアプリクローン","level":"1.2","depth":1,"next":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"previous":{"title":"はじめに","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section1.md","mtime":"2021-08-04T03:38:08.389Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T08:39:12.190Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

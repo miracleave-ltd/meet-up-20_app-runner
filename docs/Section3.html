@@ -1,0 +1,446 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <title>3. コンテナレジストリパターン · mirameet</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.20">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-pro-fixed/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-navigator/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Section4.html" />
+    
+    
+    <link rel="prev" href="Section2.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索ワードを入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Section1.html">
+            
+                <a href="Section1.html">
+            
+                    
+                    1. デモアプリクローン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Section2.html">
+            
+                <a href="Section2.html">
+            
+                    
+                    2. アプリ動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="Section3.html">
+            
+                <a href="Section3.html">
+            
+                    
+                    3. コンテナレジストリパターン
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="Section4.html">
+            
+                <a href="Section4.html">
+            
+                    
+                    1. AppRunnerデプロイ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Section5.html">
+            
+                <a href="Section5.html">
+            
+                    
+                    4. ソースコードリポジトリパターン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section7.html">
+            
+                <a href="Section7.html">
+            
+                    
+                    5. ゴミ掃除
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            HonKitで公開 
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >3. コンテナレジストリパターン</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="コンテナレジストリパターン"><a name="コンテナレジストリパターン" class="plugin-anchor" href="#コンテナレジストリパターン"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナレジストリパターン</h1>
+<p>今回はコンテナレジストリにECRを利用します。  </p>
+<h2 id="ECRリポジトリ作成">1. ECRリポジトリ作成</h2>
+<p>AWSにログインし、検索欄から「ECR」と検索します。<br><img src="img/5.png" alt><br>リポジトリを作成ボタンをクリックします。<br><img src="img/6.png" alt>
+リポジトリ名に<code>app-runner-example</code>と入力します。
+<img src="img/7.png" alt></p>
+<h2 id="ECR用IAM_User作成">2. ECR用IAM User作成</h2>
+<p>ローカルからECRにpushするためのIAM Userを作成します。<br><div class="alert alert-warning hints-alert"><div class="hints-icon"><i class="fa fa-wrench"></i></div><div class="hints-container"><p><strong>注意</strong>：すでに「AdministratorAccess」権限を持ち、プログラムのアクセスの権限のあるユーザーを作成されている場合は、このステップを飛ばしてください。</p>
+</div></div></p>
+<h3 id="ECR用ポリシー作成">2.1. ECR用ポリシー作成</h3>
+<p>IAMの画面に移動し、左メニューからポリシーを選択し、ポリシーを作成ボタンをクリックします。<br><img src="img/8.png" alt></p>
+<p>JSONを選択、下記をコピーし貼り付けてください。</p>
+<pre><code>{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;ecr:*&quot;
+            ],
+            &quot;Resource&quot;: &quot;*&quot;
+        }
+    ]
+}
+</code></pre><p>貼り付け後、<code>次のステップ：タグ</code>ボタンをクリックします。
+<img src="img/9.png" alt></p>
+<p>次の設定値を入力し、<code>ポリシーの作成</code>ボタンをクリックし、ポリシーを作成します。</p>
+<blockquote>
+<p>名前： <code>AccessEcrForAppRunner</code></p>
+</blockquote>
+<p><img src="img/10.png" alt></p>
+<h3 id="IAM_User作成">2.2. IAM User作成</h3>
+<p>左メニューからユーザーを選択し、<code>ユーザーを追加</code>ボタンをクリックします。
+<img src="img/11.png" alt></p>
+<p>次の設定値を入力し、<code>次のステップ：アクセス制限</code>ボタンをクリックします。  </p>
+<blockquote>
+<p>ユーザー名： <code>meet-up-app-runner-user</code><br>アクセスの種類： プログラムによるアクセスにチェックします。</p>
+</blockquote>
+<p><img src="img/12.png" alt></p>
+<p><code>既存のポリシーを直接アタッチ</code>を選択し、「AccessEcrForAppRunner」にチェックを入れ、確認画面までスキップします。<br><img src="img/13.png" alt></p>
+<p>確認画面で<code>.csvのダウンロード</code>ボタンをクリックし、IAM Userの認証情報が記載されているCSVをダウンロードします。<br><img src="img/14.png" alt></p>
+<h2 id="Dockerイメージプッシュ">3. Dockerイメージプッシュ</h2>
+<h3 id="AWS認証情報の設定">3.1. AWS認証情報の設定</h3>
+<p>aws-cliを利用して、ECRにイメージをプッシュします。<br>それに伴い、credentialsの設定を行います。</p>
+<pre><code># .awsに移動
+~/Desktop/meet-up-20_app-runner $ cd ~/.aws
+# credentialsを作成、修正
+.aws $ vi credentials
+</code></pre><p>先ほど、CSVでダウンロードしたIAM Userの認証情報(アクセスID,アクセスキー)を次のイコールの後に値を設定します。  </p>
+<pre><code>[default]
+aws_access_key_id = 
+aws_secret_access_key =
+</code></pre><p>※設定後は esc -&gt; :wp -&gt; Enter の順番でキーボードを打ち、保存してください。</p>
+<p>configの設定をします。</p>
+<pre><code>.aws $ vi config
+</code></pre><p>次の形式で設定します。</p>
+<pre><code>[default]
+region = ap-northeast-1
+output = json
+</code></pre><p>※設定後は esc -&gt; :wp -&gt; Enter の順番でキーボードを打ち、保存してください。</p>
+<p>ECR画面に移動し、プッシュコマンドを確認し、ECRにpushします。<br>今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS　CLIコマンドを実行します。<br>Dockerを通してAWS CLIコマンドを実行する際は下記コマンドをベースに実行します。</p>
+<pre><code>docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [AWSコマンド]
+</code></pre><p>プッシュコマンドを確認します。<br><img src="img/15.png" alt>
+<img src="img/16.png" alt></p>
+<h3 id="ECRイメージプッシュ">3.2. ECRイメージプッシュ</h3>
+<pre><code># クローンしてきたフォルダに移動
+cd ~/Desktop/meet-up-20_app-runner
+# ログインする（ログインが成功すると「Login Succeeded」が表示される）
+docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runner-exampleのプッシュコマンドの１をコピー（先頭のawsは省く）]
+例：　docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com
+# app-runner-exampleのプッシュコマンドの3を実行
+例： docker tag app-runner-example:latest 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
+# app-runner-exampleのプッシュコマンドの4を実行
+例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
+</code></pre><div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#コンテナレジストリパターン">コンテナレジストリパターン</a></p><li><a href="#ECRリポジトリ作成">1. ECRリポジトリ作成</a></li><li><a href="#ECR用IAM_User作成">2. ECR用IAM User作成</a></li><ul><li><a href="#ECR用ポリシー作成">2.1. ECR用ポリシー作成</a></li><li><a href="#IAM_User作成">2.2. IAM User作成</a></li></ul><li><a href="#Dockerイメージプッシュ">3. Dockerイメージプッシュ</a></li><ul><li><a href="#AWS認証情報の設定">3.1. AWS認証情報の設定</a></li><li><a href="#ECRイメージプッシュ">3.2. ECRイメージプッシュ</a></li></ul></ul></div><a href="#ECRリポジトリ作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Section2.html" class="navigation navigation-prev " aria-label="Previous page: 2. アプリ動作確認">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Section4.html" class="navigation navigation-next " aria-label="Next page: 1. AppRunnerデプロイ">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"1. AppRunnerデプロイ","level":"1.4.1","depth":2,"path":"Section4.md","ref":"Section4.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-04T06:47:01.756Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T08:39:12.190Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-hide-published-with/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

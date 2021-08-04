@@ -3,7 +3,7 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>はじめに · mirameet</title>
+        <title>1. AppRunnerデプロイ · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.6.20">
@@ -72,8 +72,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Section1.html" />
+    <link rel="next" href="Section5.html" />
     
+    
+    <link rel="prev" href="Section3.html" />
     
 
     </head>
@@ -102,7 +104,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -155,7 +157,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="Section4.html">
+        <li class="chapter active" data-level="1.4.1" data-path="Section4.html">
             
                 <a href="Section4.html">
             
@@ -229,7 +231,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >はじめに</a>
+        <a href="." >1. AppRunnerデプロイ</a>
     </h1>
 </div>
 
@@ -244,39 +246,24 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="面倒臭いことはもうしない！AWS_App_RunnerでWebアプリを爆速でデプロイ！"><a name="面倒臭いことはもうしない！aws-app-runnerでwebアプリを爆速でデプロイ！" class="plugin-anchor" href="#面倒臭いことはもうしない！aws-app-runnerでwebアプリを爆速でデプロイ！"><i class="fa fa-link" aria-hidden="true"></i></a>面倒臭いことはもうしない！<br>AWS App RunnerでWebアプリを爆速でデプロイ！</h1>
-<h2 id="事前準備">1. 事前準備</h2>
-<ul>
-<li>Dockerインストール</li>
-<li>GitHubアカウント</li>
-<li>AWSアカウント<h2 id="今回の流れ">2. 今回の流れ</h2>
-App Runnerを活用して、アプリケーションを実際にデプロイします。<h3 id="技術要素">2.1. 技術要素</h3>
-</li>
-<li><a href="https://aws.amazon.com/jp/apprunner/" target="_blank">AWS AppRunner</a></li>
-<li><a href="https://aws.amazon.com/jp/ecr/" target="_blank">Amazon Elastic Container Registry: ECR</a></li>
-<li><a href="https://www.docker.com/" target="_blank">Docker</a></li>
-<li><a href="https://nodejs.org/ja/" target="_blank">Node.js</a></li>
-<li><a href="https://p5js.org/" target="_blank">p5.js</a></li>
-<li><a href="https://jestjs.io/ja/" target="_blank">jest</a><h2 id="開発手順">3. 開発手順</h2>
-</li>
-<li>デモアプリクローン</li>
-<li>デモアプリ動作確認</li>
-<li>コンテナレジストリパターン<ul>
-<li>ECRリポジトリ作成</li>
-<li>Dockerイメージ作成</li>
-<li>ECRプッシュ</li>
-</ul>
-</li>
-<li>ソースコードリポジトリパターン<ul>
-<li>...</li>
-</ul>
-</li>
-<li>AppRunnerデプロイ</li>
-<li>ゴミ掃除</li>
-</ul>
-<h2 id="注意事項">4. 注意事項</h2>
-<p>App Runnerでは、まだ制限が多くあります。<br>利用する際は、事前に制限内容を確認の上、検討をお願いします。<br>ご参考までにロードマップ等ご確認ください。<br><a href="https://github.com/aws/apprunner-roadmap" target="_blank">App Runner - ロードマップ</a></p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#面倒臭いことはもうしない！AWS_App_RunnerでWebアプリを爆速でデプロイ！">面倒臭いことはもうしない！AWS App RunnerでWebアプリを爆速でデプロイ！</a></p><li><a href="#事前準備">1. 事前準備</a></li><li><a href="#今回の流れ">2. 今回の流れ</a></li><ul><li><a href="#技術要素">2.1. 技術要素</a></li></ul><li><a href="#開発手順">3. 開発手順</a></li><li><a href="#注意事項">4. 注意事項</a></li></ul></div><a href="#事前準備" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                <h1 id="App_Runnerデプロイ"><a name="app-runnerデプロイ" class="plugin-anchor" href="#app-runnerデプロイ"><i class="fa fa-link" aria-hidden="true"></i></a>App Runnerデプロイ</h1>
+<p>AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行います。</p>
+<h2 id="AppRunner作成">1. AppRunner作成</h2>
+<p>App Runnerの画面に移動します。
+<img src="img/17.png" alt>
+App Runnerサービスを作成するボタンをクリックします。
+<img src="img/18.png" alt></p>
+<h4 id="-2_App_Runnerサービスの設定、デプロイを行う">1.0.1. -2 App Runnerサービスの設定、デプロイを行う</h4>
+<h5 id="コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する"><a name="コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する" class="plugin-anchor" href="#コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する</h5>
+<p><img src="img/19.png" alt></p>
+<h5 id="サービスを設定する"><a name="サービスを設定する" class="plugin-anchor" href="#サービスを設定する"><i class="fa fa-link" aria-hidden="true"></i></a>サービスを設定する</h5>
+<p><img src="img/20.png" alt></p>
+<h5 id="作成とデプロイボタンをクリック"><a name="作成とデプロイボタンをクリック" class="plugin-anchor" href="#作成とデプロイボタンをクリック"><i class="fa fa-link" aria-hidden="true"></i></a>作成とデプロイボタンをクリック</h5>
+<p><img src="img/21.png" alt></p>
+<h3 id="デプロイ内容確認">1.1. デプロイ内容確認</h3>
+<p>デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認します。<br><img src="img/22.png" alt>  </p>
+<p>アプリが問題なく動作している場合、下記の画面が表示されます。<br><img src="img/23.png" alt>  </p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#App_Runnerデプロイ">App Runnerデプロイ</a></p><li><a href="#AppRunner作成">1. AppRunner作成</a></li><ul><li><a href="#">none</a></li><ul><li><a href="#-2_App_Runnerサービスの設定、デプロイを行う">1.0.1. -2 App Runnerサービスの設定、デプロイを行う</a></li></ul><li><a href="#デプロイ内容確認">1.1. デプロイ内容確認</a></li></ul></ul></div><a href="#AppRunner作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -303,8 +290,12 @@ App Runnerを活用して、アプリケーションを実際にデプロイし�
 
             
                 
+                <a href="Section3.html" class="navigation navigation-prev " aria-label="Previous page: 3. コンテナレジストリパターン">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="Section1.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 1. デモアプリクローン">
+                
+                <a href="Section5.html" class="navigation navigation-next " aria-label="Next page: 4. ソースコードリポジトリパターン">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -315,7 +306,7 @@ App Runnerを活用して、アプリケーションを実際にデプロイし�
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"はじめに","level":"1.1","depth":1,"next":{"title":"1. デモアプリクローン","level":"1.2","depth":1,"path":"Section1.md","ref":"Section1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"README.md","mtime":"2021-08-04T07:03:43.445Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T08:39:12.190Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1. AppRunnerデプロイ","level":"1.4.1","depth":2,"next":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[{"title":"1. AppRunnerデプロイ","level":"1.4.1","depth":2,"path":"Section4.md","ref":"Section4.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section4.md","mtime":"2021-08-04T06:11:35.802Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T08:39:12.190Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
