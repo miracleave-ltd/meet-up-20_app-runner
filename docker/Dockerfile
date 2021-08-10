@@ -16,19 +16,23 @@ RUN pkgadd.sh calibre
 RUN npm init --yes
 RUN npm i -g honkit
 # 日本語検索
-RUN npm i -g gitbook-plugin-search-pro-fixed
+RUN npm i -g gitbook-plugin-search-pro-fixed \
 # "HonKitで公開" を非表示にする
-RUN npm i -g gitbook-plugin-hide-published-with
+  gitbook-plugin-hide-published-with \
 # 各見出しにアンカーを自動で付けてくれる
-RUN npm i -g gitbook-plugin-anchors
+  gitbook-plugin-anchors \
 # 右上に目次（折りたたみ可能），右下にトップに戻るボタンの追加
-RUN npm i -g gitbook-plugin-navigator
+  gitbook-plugin-navigator \
 # SUMMARYで折りたたみ可能なノードの先頭にアイコンが付く
-RUN npm i -g gitbook-plugin-collapsible-chapters
+  gitbook-plugin-collapsible-chapters \
 # {% hint style='(info|tip|danger|working)' %} 内容 {% endhint %}
-RUN npm i -g gitbook-plugin-hints
+  gitbook-plugin-hints \
 # コードスニペットにコピーボタンが表示
-RUN npm i -g gitbook-plugin-copy-code-button
+  gitbook-plugin-copy-code-button \
+# favicon
+  gitbook-plugin-custom-favicon \
+# logo
+  gitbook-plugin-insert-logo
 
 # PDF出力の日本語フォント設定 (これがないと日本語表示不可)
 ENV LANG ja_JP.UTF-8

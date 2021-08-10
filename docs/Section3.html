@@ -36,6 +36,10 @@
                 
             
                 
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -228,9 +232,10 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="コンテナレジストリパターン"><a name="コンテナレジストリパターン" class="plugin-anchor" href="#コンテナレジストリパターン"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナレジストリパターン</h1>
+<p>この手順では序盤について、次の手順を進めていきます。<br><img src="img/47.png" alt>  </p>
 <p>今回はコンテナレジストリにECRを利用します。  </p>
 <h2 id="ECRリポジトリ作成">1. ECRリポジトリ作成</h2>
-<p>AWSにログインし、検索欄から「ECR」と検索します。<br><img src="img/5.png" alt><br>リポジトリを作成ボタンをクリックします。<br><img src="img/6.png" alt>
+<p>AWSにログインし、検索欄から「ECR」と検索します。<br>※次のリンクでも表示します。<br>　<a href="https://ap-northeast-1.console.aws.amazon.com/ecr/repositories?region=ap-northeast-1" target="_blank">Amazon ECR Repositories</a><br><img src="img/5.png" alt><br>リポジトリを作成ボタンをクリックします。<br><img src="img/6.png" alt>
 リポジトリ名に<code>app-runner-example</code>と入力します。
 <img src="img/7.png" alt></p>
 <h2 id="ECR用IAM_User作成">2. ECR用IAM User作成</h2>
@@ -253,7 +258,7 @@
 }
 </code></pre><p>貼り付け後、<code>次のステップ：タグ</code>ボタンをクリックします。
 <img src="img/9.png" alt></p>
-<p>次の設定値を入力し、<code>ポリシーの作成</code>ボタンをクリックし、ポリシーを作成します。</p>
+<p>タグの設定は不要です。<br><code>次のステップ：確認</code>ボタンをクリックします。<br>次の設定値を入力し、<code>ポリシーの作成</code>ボタンをクリックし、ポリシーを作成します。</p>
 <blockquote>
 <p>名前： <code>AccessEcrForAppRunner</code></p>
 </blockquote>
@@ -270,55 +275,75 @@
 <p>確認画面で<code>.csvのダウンロード</code>ボタンをクリックし、IAM Userの認証情報が記載されているCSVをダウンロードします。<br><img src="img/14.png" alt></p>
 <h2 id="Dockerイメージプッシュ">3. Dockerイメージプッシュ</h2>
 <h3 id="AWS認証情報の設定">3.1. AWS認証情報の設定</h3>
-<p>aws-cliを利用して、ECRにイメージをプッシュします。<br>それに伴い、credentialsの設定を行います。</p>
-<pre><code># .awsに移動
-~/Desktop/meet-up-20_app-runner $ cd ~/.aws
-# credentialsを作成、修正
-.aws $ vi credentials
-</code></pre><p>先ほど、CSVでダウンロードしたIAM Userの認証情報(アクセスID,アクセスキー)を次のイコールの後に値を設定します。  </p>
-<pre><code>[default]
-aws_access_key_id = 
-aws_secret_access_key =
-</code></pre><p>※設定後は esc -&gt; :wp -&gt; Enter の順番でキーボードを打ち、保存してください。</p>
-<p>configの設定をします。</p>
-<pre><code>.aws $ vi config
-</code></pre><p>次の形式で設定します。</p>
-<pre><code>[default]
+<p>aws-cliを利用して、ECRにイメージをプッシュします。<br>それに伴い、credentialsの設定を行います。  </p>
+<pre><code># awsフォルダを作成
+mkdir aws
+</code></pre><hr>
+<p>先ほど、CSVでダウンロードしたIAM Userの認証情報(アクセスID,アクセスキー)を次のイコールの後に値を設定します。  </p>
+<p><strong>Macの場合</strong></p>
+<pre><code>cat &lt;&lt;EOF &gt; aws/credentials
+[default]
+aws_access_key_id = [Access key ID]
+aws_secret_access_key = [Secret access key]
+EOF
+</code></pre><p><strong>Windowsの場合</strong></p>
+<pre><code>(
+  echo [default]
+  echo aws_access_key_id = [Access key ID]
+  echo aws_secret_access_key = [Secret access key]
+) &gt;&gt; aws/credentials
+</code></pre><hr>
+<p>configの設定をします。<br><strong>Macの場合</strong></p>
+<pre><code>cat &lt;&lt;EOF &gt; aws/config
+[default]
 region = ap-northeast-1
 output = json
-</code></pre><p>※設定後は esc -&gt; :wp -&gt; Enter の順番でキーボードを打ち、保存してください。</p>
-<p>ECR画面に移動し、プッシュコマンドを確認し、ECRにpushします。<br>今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS　CLIコマンドを実行します。<br>Dockerを通してAWS CLIコマンドを実行する際は下記コマンドをベースに実行します。</p>
-<pre><code>docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [AWSコマンド]
-</code></pre><p>プッシュコマンドを確認します。<br><img src="img/15.png" alt>
+EOF
+</code></pre><p><strong>Windowsの場合</strong></p>
+<pre><code>(
+  echo [default]
+  echo region = ap-northeast-1
+  echo output = json
+) &gt;&gt; aws/config
+</code></pre><hr>
+<p>ECR画面に移動し、プッシュコマンドを確認し、ECRにpushします。<br>今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS CLIコマンドを実行します。  </p>
+<p>プッシュコマンドを確認します。<br>後続のECRイメージプッシュ手順で利用します。<br><img src="img/15.png" alt>
 <img src="img/16.png" alt></p>
 <h3 id="ECRイメージプッシュ">3.2. ECRイメージプッシュ</h3>
-<pre><code># クローンしてきたフォルダに移動
-cd ~/Desktop/meet-up-20_app-runner
-# ログインする（ログインが成功すると「Login Succeeded」が表示される）
-docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runner-exampleのプッシュコマンドの１をコピー（先頭のawsは省く）]
-例：　docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com
-# app-runner-exampleのプッシュコマンドの3を実行
-例： docker tag app-runner-example:latest 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
-# app-runner-exampleのプッシュコマンドの4を実行
-例： docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest
-</code></pre><h2 id="AppRunner作成">4. AppRunner作成</h2>
-<h3 id="App_Runnerの画面に移動">4.1. App Runnerの画面に移動</h3>
-<p><img src="img/17.png" alt></p>
-<h3 id="App_Runnerサービスを作成するボタンをクリック">4.2. App Runnerサービスを作成するボタンをクリック</h3>
-<p><img src="img/18.png" alt></p>
-<h3 id="App_Runnerサービスの設定、デプロイを行う">4.3. App Runnerサービスの設定、デプロイを行う</h3>
-<h5 id="コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する"><a name="コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する" class="plugin-anchor" href="#コンテナイメージのuriは、先ほど作成したecrリポジトリを選択する"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナイメージのURIは、先ほど作成したECRリポジトリを選択する</h5>
+<ol>
+<li><p>AWS CLIでAWSにログインします。<br><strong>Macの場合</strong><br>例：<code>docker run --rm -ti -v $(pwd)/aws:/root/.aws -v $(pwd):/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com</code></p>
+<pre><code>docker run --rm -ti -v $(pwd)/aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runner-exampleのプッシュコマンドの１をコピー（先頭のawsは省く）]
+</code></pre><p><strong>Windowsの場合</strong><br>例：<code>docker run --rm -ti -v %cd%/aws:/root/.aws -v %cd%:/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com</code></p>
+<pre><code>docker run --rm -ti -v %cd%/aws:/root/.aws -v %cd%:/aws amazon/aws-cli [app-runner-exampleのプッシュコマンドの１をコピー（先頭のawsは省く）]
+</code></pre><p>ログインが成功すると次のメッセージが表示されます。  </p>
+<blockquote>
+<p>Login Succeeded  </p>
+</blockquote>
+</li>
+<li>app-runner-exampleのプッシュコマンドの3を実行します。<br>例：<code>docker tag app-runner-example:latest 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest</code>  </li>
+<li>app-runner-exampleのプッシュコマンドの4を実行します。<br>例：<code>docker push 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example:latest</code><br>プッシュコマンドが成功すると、次のメッセージが表示されます。  <blockquote>
+<p>The push refers to repository [0000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example]<br>00000d76f0b8: Pushed<br>00000cbf4ab0: Layer already exists<br>...<br>latest: digest: sha256:97c0000000000... size: 3051  </p>
+</blockquote>
+</li>
+</ol>
+<h2 id="App_Runnerデプロイ">4. App Runnerデプロイ</h2>
+<p>AWSのApp Runnerの画面に移動し、App Runnerの設定、デプロイを行います。<br>以降の手順では次の手順を進めていきます。<br><img src="img/48.png" alt>  </p>
+<h3 id="AppRunner作成">4.1. AppRunner作成</h3>
+<p>App Runnerの画面に移動します。
+※次のリンクでも表示します。<br>　<a href="https://ap-northeast-1.console.aws.amazon.com/apprunner/home?region=ap-northeast-1#/welcome" target="_blank">AWS App Runner</a><br><img src="img/17.png" alt>
+App Runnerサービスを作成するボタンをクリックします。
+<img src="img/18.png" alt></p>
+<h4 id="App_Runnerサービスの設定、デプロイを行行います。">4.1.1. App Runnerサービスの設定、デプロイを行行います。</h4>
+<h5 id="コンテナイメージのURIは、先ほど作成したECRリポジトリを選択します。"><a name="コンテナイメージのuriは、先ほど作成したecrリポジトリを選択します。" class="plugin-anchor" href="#コンテナイメージのuriは、先ほど作成したecrリポジトリを選択します。"><i class="fa fa-link" aria-hidden="true"></i></a>コンテナイメージのURIは、先ほど作成したECRリポジトリを選択します。</h5>
 <p><img src="img/19.png" alt></p>
-<h5 id="サービスを設定する"><a name="サービスを設定する" class="plugin-anchor" href="#サービスを設定する"><i class="fa fa-link" aria-hidden="true"></i></a>サービスを設定する</h5>
+<h5 id="サービスを設定します。"><a name="サービスを設定します。" class="plugin-anchor" href="#サービスを設定します。"><i class="fa fa-link" aria-hidden="true"></i></a>サービスを設定します。</h5>
 <p><img src="img/20.png" alt></p>
-<h5 id="作成とデプロイボタンをクリック"><a name="作成とデプロイボタンをクリック" class="plugin-anchor" href="#作成とデプロイボタンをクリック"><i class="fa fa-link" aria-hidden="true"></i></a>作成とデプロイボタンをクリック</h5>
+<h5 id="作成とデプロイボタンをクリックします。"><a name="作成とデプロイボタンをクリックします。" class="plugin-anchor" href="#作成とデプロイボタンをクリックします。"><i class="fa fa-link" aria-hidden="true"></i></a>作成とデプロイボタンをクリックします。</h5>
 <p><img src="img/21.png" alt></p>
-<h2 id="デプロイ内容確認">5. デプロイ内容確認</h2>
-<h3 id="デプロイが完了後、App_Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認">5.1. デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認</h3>
-<p><img src="img/22.png" alt>  </p>
-<h4 id="アプリが問題なく動作している場合、下記の画面が表示されます。">5.1.1. アプリが問題なく動作している場合、下記の画面が表示されます。</h4>
-<p><img src="img/23.png" alt>  </p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#コンテナレジストリパターン">コンテナレジストリパターン</a></p><li><a href="#ECRリポジトリ作成">1. ECRリポジトリ作成</a></li><li><a href="#ECR用IAM_User作成">2. ECR用IAM User作成</a></li><ul><li><a href="#ECR用ポリシー作成">2.1. ECR用ポリシー作成</a></li><li><a href="#IAM_User作成">2.2. IAM User作成</a></li></ul><li><a href="#Dockerイメージプッシュ">3. Dockerイメージプッシュ</a></li><ul><li><a href="#AWS認証情報の設定">3.1. AWS認証情報の設定</a></li><li><a href="#ECRイメージプッシュ">3.2. ECRイメージプッシュ</a></li></ul><li><a href="#AppRunner作成">4. AppRunner作成</a></li><ul><li><a href="#App_Runnerの画面に移動">4.1. App Runnerの画面に移動</a></li><li><a href="#App_Runnerサービスを作成するボタンをクリック">4.2. App Runnerサービスを作成するボタンをクリック</a></li><li><a href="#App_Runnerサービスの設定、デプロイを行う">4.3. App Runnerサービスの設定、デプロイを行う</a></li></ul><li><a href="#デプロイ内容確認">5. デプロイ内容確認</a></li><ul><li><a href="#デプロイが完了後、App_Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認">5.1. デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認</a></li><ul><li><a href="#アプリが問題なく動作している場合、下記の画面が表示されます。">5.1.1. アプリが問題なく動作している場合、下記の画面が表示されます。</a></li></ul></ul></ul></div><a href="#ECRリポジトリ作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
+<h3 id="デプロイ内容確認">4.2. デプロイ内容確認</h3>
+<p>デプロイが完了後、App Runner画面の公開されたURLにアクセスし、アプリが動いているかを確認します。<br><img src="img/22.png" alt>  </p>
+<p>アプリが問題なく動作している場合、下記の画面が表示されます。<br><img src="img/23.png" alt>  </p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#コンテナレジストリパターン">コンテナレジストリパターン</a></p><li><a href="#ECRリポジトリ作成">1. ECRリポジトリ作成</a></li><li><a href="#ECR用IAM_User作成">2. ECR用IAM User作成</a></li><ul><li><a href="#ECR用ポリシー作成">2.1. ECR用ポリシー作成</a></li><li><a href="#IAM_User作成">2.2. IAM User作成</a></li></ul><li><a href="#Dockerイメージプッシュ">3. Dockerイメージプッシュ</a></li><ul><li><a href="#AWS認証情報の設定">3.1. AWS認証情報の設定</a></li><li><a href="#ECRイメージプッシュ">3.2. ECRイメージプッシュ</a></li></ul><li><a href="#App_Runnerデプロイ">4. App Runnerデプロイ</a></li><ul><li><a href="#AppRunner作成">4.1. AppRunner作成</a></li><ul><li><a href="#App_Runnerサービスの設定、デプロイを行行います。">4.1.1. App Runnerサービスの設定、デプロイを行行います。</a></li></ul><li><a href="#デプロイ内容確認">4.2. デプロイ内容確認</a></li></ul></ul></div><a href="#ECRリポジトリ作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -361,7 +386,7 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-04T10:45:20.775Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T10:45:35.201Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-10T15:16:15.366Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-10T15:16:39.686Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -432,6 +457,10 @@ docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli [app-runn
     
         
         <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
         
     
         

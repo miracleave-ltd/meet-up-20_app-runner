@@ -8,6 +8,15 @@
         , "collapsible-chapters"
         , "hints"
         , "copy-code-button"
+        , "custom-favicon"
+        , "insert-logo"
     ],
+    "pluginsConfig": {
+        "favicon": "./img/miracleave.ico",
+        "insert-logo": {
+            "url": "./img/miracleave.png",
+            "style": "background: none; width: 100%;"
+        }
+    },
     "language": "ja"
 }

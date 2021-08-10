@@ -36,6 +36,10 @@
                 
             
                 
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -226,12 +230,44 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="ゴミ掃除"><a name="ゴミ掃除" class="plugin-anchor" href="#ゴミ掃除"><i class="fa fa-link" aria-hidden="true"></i></a>ゴミ掃除</h1>
-<p>次のリンクよりApp Runnerサービス一覧画面を表示します。<br><a href="https://ap-northeast-1.console.aws.amazon.com/apprunner/home?region=ap-northeast-1#/services" target="_blank">App Runnerサービス一覧</a><br><img src="img/40.png" alt>  </p>
+<h2 id="App_Runnerサービス削除">1. App Runnerサービス削除</h2>
+<p>次のリンクよりApp Runnerサービス一覧を表示します。<br><a href="https://ap-northeast-1.console.aws.amazon.com/apprunner/home?region=ap-northeast-1#/services" target="_blank">App Runnerサービス一覧</a><br><img src="img/40.png" alt>  </p>
 <p>画面に表示されている指示通り、入力欄に<code>delete</code>を入力し、<code>削除</code>ボタンをクリックします。<br><img src="img/41.png" alt>  </p>
 <p>本日作成したサービスが削除されていることを確認します。
 <img src="img/42.png" alt></p>
+<h2 id="IAM削除">2. IAM削除</h2>
+<h3 id="IAMユーザー削除">2.1. IAMユーザー削除</h3>
+<p>次のリンクよりIAMユーザー一覧を表示します。<br><a href="https://console.aws.amazon.com/iamv2/home#/users" target="_blank">IAMユーザー</a>  </p>
+<p>今回作成したユーザーを選択し、<code>削除</code>ボタンをクリックします。<br><img src="img/51.png" alt>  </p>
+<p>画面に表示されている指示通り、入力欄に<code>meet-up-app-runner-user</code>を入力し、<code>削除</code>ボタンをクリックします。<br><img src="img/52.png" alt>  </p>
+<p>対象のユーザーが削除されていることを確認します。<br><img src="img/53.png" alt>  </p>
+<h3 id="IAMポリシー削除">2.2. IAMポリシー削除</h3>
+<p>次のリンクよりIAMポリシー一覧を表示します。<br><a href="https://console.aws.amazon.com/iamv2/home?#/policies" target="_blank">IAMポリシー</a>  </p>
+<p>作成したIAMポリシーを選択し、<code>アクション</code>ボタンのドロップダウンより<code>削除</code>ボタンをクリックします。<br><img src="img/54.png" alt>  </p>
+<p>画面に表示されている指示通り、入力欄に<code>AccessEcrForAppRunner</code>を入力し、<code>削除</code>ボタンをクリックします。<br><img src="img/55.png" alt>  </p>
+<p>検索欄に<code>AccessEcrForAppRunner</code>を入力し、対象のポリシーが削除されていることを確認します。<br><img src="img/56.png" alt>  </p>
+<h2 id="ローカルに構築したDockerイメージ削除">3. ローカルに構築したDockerイメージ削除</h2>
+<p>次のコマンドを実行し、コンテナ状態を確認します。  </p>
+<pre><code>docker ps
+---
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+e572bd192f8d   app-runner-example   &quot;docker-entrypoint.s…&quot;   00 seconds ago   Up 00 seconds   0.0.0.0:3333-&gt;3333/tcp, :::3333-&gt;3333/tcp   nice_kare
+</code></pre><p>上記で実行した<code>CONTAINER ID</code>を次のコマンドで利用します。<br>起動中のコンテナを停止します。  </p>
+<pre><code>docker stop [CONTAINER ID]
+</code></pre><p>ビルドして作成したコンテナイメージを削除します。  </p>
+<pre><code>docker rmi -f app-runner-example
+</code></pre><p>次のメッセージが表示されれば、成功です。  </p>
+<blockquote>
+<p>Untagged: 000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example...  </p>
+</blockquote>
+<p>ECRにプッシュしたイメージを削除します。<br>コンテナ名は次の手順で利用した<code>000000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example</code>を入力してください。</p>
+<pre><code>docker rmi -f [コンテナ名]
+</code></pre><p>次のメッセージが表示されれば、成功です。  </p>
+<blockquote>
+<p>Untagged: 000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example...<br>Deleted: sha256:f382b74e...  </p>
+</blockquote>
 <p>以上。</p>
-
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#ゴミ掃除">ゴミ掃除</a></p><li><a href="#App_Runnerサービス削除">1. App Runnerサービス削除</a></li><li><a href="#IAM削除">2. IAM削除</a></li><ul><li><a href="#IAMユーザー削除">2.1. IAMユーザー削除</a></li><li><a href="#IAMポリシー削除">2.2. IAMポリシー削除</a></li></ul><li><a href="#ローカルに構築したDockerイメージ削除">3. ローカルに構築したDockerイメージ削除</a></li></ul></div><a href="#App_Runnerサービス削除" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -270,7 +306,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5. ゴミ掃除","level":"1.6","depth":1,"previous":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"navigator":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section7.md","mtime":"2021-08-04T10:34:59.247Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-04T10:45:35.201Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5. ゴミ掃除","level":"1.6","depth":1,"previous":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section7.md","mtime":"2021-08-10T14:57:16.382Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-10T15:16:39.686Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -341,6 +377,10 @@
     
         
         <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
         
     
         
