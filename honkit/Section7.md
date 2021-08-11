@@ -75,4 +75,28 @@ docker rmi -f [コンテナ名]
 > Untagged: 000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example...  
 > Deleted: sha256:f382b74e...  
 
+## フォルダの削除
+
+次のコマンドでフォルダを完全に削除します。
+
+**Macの場合**
+```
+# 一つ上の階層に移動
+cd ../
+# meet-up-20_app-runnerフォルダが存在しているかを確認
+ls
+# meet-up-20_app-runnerフォルダが存在している場合、下記コマンドを実行しフォルダを削除
+rm -rf meet-up-20_app-runner
+```
+
+**Windowsの場合**
+```
+# 一つ上の階層に移動
+cd ../
+# meet-up-20_app-runnerフォルダが存在しているかを確認
+dir
+# meet-up-20_app-runnerフォルダが存在している場合、下記コマンドを実行しフォルダを削除
+rd /s /q meet-up-20_app-runner
+```
+
 以上。
