@@ -44,9 +44,9 @@
 ### IAMロール削除
 
 次のリンクよりIAMロール一覧を表示します。  
-[IAMポリシー](https://console.aws.amazon.com/iamv2/home?#/policies)  
+[IAMロール](https://console.aws.amazon.com/iamv2/home#/roles)  
 
-作成したIAMロールを選択し、`アクション`ボタンのドロップダウンより`削除`ボタンをクリックします。  
+作成したIAMロールを選択し、`削除`ボタンをクリックします。  
 ![57](https://user-images.githubusercontent.com/55343055/129122840-94fe88c5-7983-4c1b-8dba-681924b14459.png)
 
 画面に表示されている指示通り、入力欄に`AppRunnerECRAccessRole `を入力し、`削除`ボタンをクリックします。  
