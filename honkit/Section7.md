@@ -39,10 +39,22 @@
 ![](img/55.png)  
 
 検索欄に`AccessEcrForAppRunner`を入力し、対象のポリシーが削除されていることを確認します。  
-![](img/56.png)  
+![](img/56.png) 
+
+### IAMロール削除
+
+次のリンクよりIAMロール一覧を表示します。  
+[IAMポリシー](https://console.aws.amazon.com/iamv2/home?#/policies)  
+
+作成したIAMロールを選択し、`アクション`ボタンのドロップダウンより`削除`ボタンをクリックします。  
+![57](https://user-images.githubusercontent.com/55343055/129122840-94fe88c5-7983-4c1b-8dba-681924b14459.png)
+
+画面に表示されている指示通り、入力欄に`AppRunnerECRAccessRole `を入力し、`削除`ボタンをクリックします。  
+![58](https://user-images.githubusercontent.com/55343055/129122877-88a602a4-4533-4d0f-9e21-8e657497abd3.png)
 
 ## ローカルに構築したDockerイメージ削除
 
+### コンテナの停止
 次のコマンドを実行し、コンテナ状態を確認します。  
 ```
 docker ps
@@ -57,23 +69,43 @@ e572bd192f8d   app-runner-example   "docker-entrypoint.s…"   00 seconds ago   
 docker stop [CONTAINER ID]
 ```
 
-ビルドして作成したコンテナイメージを削除します。  
+### イメージの削除
+次のコマンドを実行し、作成したコンテナイメージを確認します
 ```
-docker rmi -f app-runner-example
+docker images
+```
+
+まずは、ビルドで作成したコンテナイメージを削除します。（イメージ名が`app-runner-example`のイメージ） 
+
+注意：[IMAGE ID]には、上記で実行した際に表示された、表示結果の左から３番目のランダムな文字列がIMAGE IDです。
+```
+docker rmi -f [IMAGE ID]
 ```
 
 次のメッセージが表示されれば、成功です。  
-> Untagged: 000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example...  
+> Untagged: app-runner-example...  
 
-ECRにプッシュしたイメージを削除します。  
-コンテナ名は次の手順で利用した`000000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example`を入力してください。
+次にECRにプッシュしたイメージを削除します。 （イメージ名が`000000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example`の形式になっているイメージ） 
+
+注意：[IMAGE ID]には、上記で実行した際に表示された、表示結果の左から３番目のランダムな文字列がIMAGE IDです。
 ```
-docker rmi -f [コンテナ名]
+docker rmi -f [IMAGE ID]
 ```
 
 次のメッセージが表示されれば、成功です。  
 > Untagged: 000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example...  
 > Deleted: sha256:f382b74e...  
+
+最後にECRプッシュする際に使用したAWS CLIのイメージを削除します。（イメージ名が`amazon/aws-cli`のイメージ）
+
+注意：[IMAGE ID]には、上記で実行した際に表示された、表示結果の左から３番目のランダムな文字列がIMAGE IDです。
+```
+docker rmi -f [IMAGE ID]
+```
+
+次のメッセージが表示されれば、成功です。
+Untagged: amazon/aws-cli:latest
+Untagged: amazon/aws-cli@sha256:8b40031b3b3a7ed06f0e4c6b7163d5045c242cf54b635901d87e05c6bd7b193c...
 
 ## フォルダの削除
 
