@@ -85,6 +85,8 @@ docker rmi -f [IMAGE ID]
 次のメッセージが表示されれば、成功です。  
 > Untagged: app-runner-example...  
 
+<br>
+
 次にECRにプッシュしたイメージを削除します。 （イメージ名が`000000000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example`の形式になっているイメージ） 
 
 注意：[IMAGE ID]には、上記で実行した際に表示された、表示結果の左から３番目のランダムな文字列がIMAGE IDです。
@@ -96,6 +98,8 @@ docker rmi -f [IMAGE ID]
 > Untagged: 000000.dkr.ecr.ap-northeast-1.amazonaws.com/app-runner-example...  
 > Deleted: sha256:f382b74e...  
 
+<br>
+
 最後にECRプッシュする際に使用したAWS CLIのイメージを削除します。（イメージ名が`amazon/aws-cli`のイメージ）
 
 注意：[IMAGE ID]には、上記で実行した際に表示された、表示結果の左から３番目のランダムな文字列がIMAGE IDです。
@@ -104,8 +108,8 @@ docker rmi -f [IMAGE ID]
 ```
 
 次のメッセージが表示されれば、成功です。
-Untagged: amazon/aws-cli:latest
-Untagged: amazon/aws-cli@sha256:8b40031b3b3a7ed06f0e4c6b7163d5045c242cf54b635901d87e05c6bd7b193c...
+> Untagged: amazon/aws-cli:latest
+> Untagged: amazon/aws-cli@sha256:8b40031b3b3a7ed06f0e4c6b7163d5045c242cf54b635901d87e05c6bd7b193c...
 
 ## フォルダの削除
 
