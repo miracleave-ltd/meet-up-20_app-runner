@@ -10,7 +10,9 @@ AWSにログインし、検索欄から「ECR」と検索します。
 ※次のリンクでも表示します。  
 　[Amazon ECR Repositories](https://ap-northeast-1.console.aws.amazon.com/ecr/repositories?region=ap-northeast-1)  
 ![](img/5.png)  
-リポジトリを作成ボタンをクリックします。  
+リポジトリを作成ボタンをクリックします。 
+
+**注意：リージョンが東京リージョンになっているかを確認してください。東京リージョン以外の場合はリージョンを東京に選択してください。**
 ![](img/6.png)
 リポジトリ名に`app-runner-example`と入力します。
 ![](img/7.png)
@@ -131,6 +133,9 @@ ECR画面に移動し、プッシュコマンドを確認し、ECRにpushしま�
 プッシュコマンドを確認します。  
 後続のECRイメージプッシュ手順で利用します。  
 ![](img/15.png)
+
+**注意：Windowユーザーの方がプッシュコマンドを利用する際は、WindowsのプッシュコマンドではなくmacOS/Linuxのプッシュコマンドを使用してください。**
+
 ![](img/16.png)
 
 ### ECRイメージプッシュ
