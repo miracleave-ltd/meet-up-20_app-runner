@@ -235,7 +235,9 @@
 <p>この手順では序盤について、次の手順を進めていきます。<br><img src="img/47.png" alt>  </p>
 <p>今回はコンテナレジストリにECRを利用します。  </p>
 <h2 id="ECRリポジトリ作成">1. ECRリポジトリ作成</h2>
-<p>AWSにログインし、検索欄から「ECR」と検索します。<br>※次のリンクでも表示します。<br>　<a href="https://ap-northeast-1.console.aws.amazon.com/ecr/repositories?region=ap-northeast-1" target="_blank">Amazon ECR Repositories</a><br><img src="img/5.png" alt><br>リポジトリを作成ボタンをクリックします。<br><img src="img/6.png" alt>
+<p>AWSにログインし、検索欄から「ECR」と検索します。<br>※次のリンクでも表示します。<br>　<a href="https://ap-northeast-1.console.aws.amazon.com/ecr/repositories?region=ap-northeast-1" target="_blank">Amazon ECR Repositories</a><br><img src="img/5.png" alt><br>リポジトリを作成ボタンをクリックします。 </p>
+<p><strong>注意：リージョンが東京リージョンになっているかを確認してください。東京リージョン以外の場合はリージョンを東京に選択してください。</strong>
+<img src="img/6.png" alt>
 リポジトリ名に<code>app-runner-example</code>と入力します。
 <img src="img/7.png" alt></p>
 <h2 id="ECR用IAM_User作成">2. ECR用IAM User作成</h2>
@@ -307,8 +309,9 @@ EOF
 ) &gt;&gt; aws/config
 </code></pre><hr>
 <p>ECR画面に移動し、プッシュコマンドを確認し、ECRにpushします。<br>今回はAWS CLIをローカルにダウンロードせず、Dockerを通してAWS CLIコマンドを実行します。  </p>
-<p>プッシュコマンドを確認します。<br>後続のECRイメージプッシュ手順で利用します。<br><img src="img/15.png" alt>
-<img src="img/16.png" alt></p>
+<p>プッシュコマンドを確認します。<br>後続のECRイメージプッシュ手順で利用します。<br><img src="img/15.png" alt></p>
+<p><strong>注意：Windowユーザーの方がプッシュコマンドを利用する際は、WindowsのプッシュコマンドではなくmacOS/Linuxのプッシュコマンドを使用してください。</strong></p>
+<p><img src="img/16.png" alt></p>
 <h3 id="ECRイメージプッシュ">3.2. ECRイメージプッシュ</h3>
 <ol>
 <li><p>AWS CLIでAWSにログインします。<br><strong>Macの場合</strong><br>例：<code>docker run --rm -ti -v $(pwd)/aws:/root/.aws -v $(pwd):/aws amazon/aws-cli ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 0000000000.dkr.ecr.ap-northeast-1.amazonaws.com</code></p>
@@ -386,7 +389,7 @@ App Runnerサービスを作成するボタンをクリックします。
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-11T01:59:41.497Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-11T02:19:24.594Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. コンテナレジストリパターン","level":"1.4","depth":1,"next":{"title":"4. ソースコードリポジトリパターン","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. アプリ動作確認","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-08-12T02:00:22.790Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-08-12T02:05:13.560Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
